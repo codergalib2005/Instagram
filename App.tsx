@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import FeedPost from './src/components/FeedPost/FeedPost';
+import FeedPost from './src/components/FeedPost';
 
 const App = () => {
   const isLiked = true;
