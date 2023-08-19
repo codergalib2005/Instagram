@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import fonts from '../../theme/fonts';
@@ -16,8 +16,10 @@ interface PropsTypes {
 
 const FeedPost: React.FC<PropsTypes> = ({post}: PropsTypes) => {
   const {comments, createdAt, description, id, image, user} = post;
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
   const isLiked = true;
+
   return (
     <View style={styles.post}>
       {/* Post Header */}
@@ -77,7 +79,7 @@ const FeedPost: React.FC<PropsTypes> = ({post}: PropsTypes) => {
         </Text>
 
         {/* Post description */}
-        <Text style={styles.text}>
+        <Text numberOfLines={isDescriptionExpanded ? 0 : 3} style={styles.text}>
           <Text style={styles.bold}> codergalib2005</Text>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam
           provident similique itaque non impedit qui ipsa voluptate
