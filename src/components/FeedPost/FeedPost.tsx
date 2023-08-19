@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
+import Comment from '../Comment/Comment';
 
 interface PropsTypes {
   post: {
@@ -18,9 +19,9 @@ interface PropsTypes {
       id: string;
       image: string;
       username: string;
-      nofComments: number;
-      nofLikes: number;
     };
+    nofComments: number;
+    nofLikes: number;
     comments: {
       id: string;
       comment: string;
@@ -33,7 +34,7 @@ interface PropsTypes {
 }
 
 const FeedPost: React.FC<PropsTypes> = ({post}) => {
-  console.log({post});
+  const {comments, createdAt, description, id, image, user} = post;
 
   const isLiked = true;
   return (
@@ -42,11 +43,11 @@ const FeedPost: React.FC<PropsTypes> = ({post}) => {
       <View style={styles.header}>
         <Image
           source={{
-            uri: 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
+            uri: user.image,
           }}
           style={styles.userAvatar}
         />
-        <Text style={styles.userName}>codergalib2005</Text>
+        <Text style={styles.userName}>{user.username}</Text>
         <Entypo
           name="dots-three-horizontal"
           size={16}
@@ -56,7 +57,7 @@ const FeedPost: React.FC<PropsTypes> = ({post}) => {
       {/* Post Content */}
       <Image
         source={{
-          uri: 'https://images.pexels.com/photos/2745258/pexels-photo-2745258.jpeg',
+          uri: image,
         }}
         style={styles.image}
       />
@@ -104,15 +105,11 @@ const FeedPost: React.FC<PropsTypes> = ({post}) => {
         </Text>
         {/* Comments */}
         <Text>View all 14 comments</Text>
-        <View style={styles.comment}>
-          <Text style={styles.commentText}>
-            <Text style={styles.bold}>codergalib2005</Text> Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Modi, accusantium!
-          </Text>
-          <AntDesign name={'hearto'} color={colors.black} style={styles.icon} />
-        </View>
+        {comments.map(comment => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
         {/* Posted date */}
-        <Text>19 Devember, 2021</Text>
+        <Text>{createdAt}</Text>
       </View>
     </View>
   );

@@ -36,20 +36,12 @@ const styles = StyleSheet.create({
   icon: {
     marginHorizontal: 5,
   },
-  text: {
-    color: colors.black,
-    lineHeight: 18,
-  },
-  commentText: {
-    color: colors.black,
-    flex: 1,
-  },
   bold: {
     fontWeight: fonts.weight.bold,
   },
-  comment: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  text: {
+    color: colors.black,
+    lineHeight: 18,
   },
 });
 
