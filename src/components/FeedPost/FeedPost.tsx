@@ -8,7 +8,33 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
 
-export default function FeedPost() {
+interface PropsTypes {
+  post: {
+    id: string;
+    createdAt: string;
+    image: string;
+    description: string;
+    user: {
+      id: string;
+      image: string;
+      username: string;
+      nofComments: number;
+      nofLikes: number;
+    };
+    comments: {
+      id: string;
+      comment: string;
+      user: {
+        id: string;
+        username: string;
+      };
+    }[];
+  };
+}
+
+const FeedPost: React.FC<PropsTypes> = ({post}) => {
+  console.log({post});
+
   const isLiked = true;
   return (
     <View style={styles.post}>
@@ -90,4 +116,6 @@ export default function FeedPost() {
       </View>
     </View>
   );
-}
+};
+
+export default FeedPost;
