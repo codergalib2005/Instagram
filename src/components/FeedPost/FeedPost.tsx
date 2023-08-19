@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import fonts from '../../theme/fonts';
 import colors from '../../theme/colors';
@@ -9,6 +9,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
 import Comment from '../Comment/Comment';
 import {IPost} from '../../types/models';
+import DoublePressable from '../DoublePress/DoublePressable';
 
 interface PropsTypes {
   post: IPost;
@@ -17,9 +18,21 @@ interface PropsTypes {
 const FeedPost: React.FC<PropsTypes> = ({post}: PropsTypes) => {
   const {comments, createdAt, description, id, image, user} = post;
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-
-  const isLiked = true;
-
+  const [isLiked, setIsLiked] = useState(false);
+  const handleDescriptionExpanded = () => {
+    setIsDescriptionExpanded(v => !v);
+  };
+  let lastTap = 0;
+  const handleDoublePress = () => {
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      handleLike();
+    }
+    lastTap = now;
+  };
+  const handleLike = () => {
+    setIsLiked(v => !v);
+  };
   return (
     <View style={styles.post}>
       {/* Post Header */}
@@ -38,21 +51,25 @@ const FeedPost: React.FC<PropsTypes> = ({post}: PropsTypes) => {
         />
       </View>
       {/* Post Content */}
-      <Image
-        source={{
-          uri: image,
-        }}
-        style={styles.image}
-      />
+      <DoublePressable>
+        <Image
+          source={{
+            uri: image,
+          }}
+          style={styles.image}
+        />
+      </DoublePressable>
       {/* Post Footer */}
       <View style={styles.footer}>
         <View style={styles.iconContainer}>
-          <AntDesign
-            name={isLiked ? 'heart' : 'hearto'}
-            size={24}
-            color={colors.black}
-            style={styles.icon}
-          />
+          <Pressable onPress={handleDoublePress}>
+            <AntDesign
+              name={isLiked ? 'heart' : 'hearto'}
+              size={24}
+              color={colors.black}
+              style={styles.icon}
+            />
+          </Pressable>
           <Ionicons
             name="chatbubble-outline"
             size={24}
@@ -79,12 +96,15 @@ const FeedPost: React.FC<PropsTypes> = ({post}: PropsTypes) => {
         </Text>
 
         {/* Post description */}
-        <Text numberOfLines={isDescriptionExpanded ? 0 : 3} style={styles.text}>
+        <Text numberOfLines={isDescriptionExpanded ? 0 : 2} style={styles.text}>
           <Text style={styles.bold}> codergalib2005</Text>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam
           provident similique itaque non impedit qui ipsa voluptate
           reprehenderit totam delectus ea repellat, nihil modi saepe
           perspiciatis dolor.
+        </Text>
+        <Text onPress={handleDescriptionExpanded}>
+          {isDescriptionExpanded ? 'less' : 'more'}
         </Text>
         {/* Comments */}
         <Text>View all 14 comments</Text>
