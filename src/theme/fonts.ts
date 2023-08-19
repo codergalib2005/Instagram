@@ -1,3 +1,5 @@
+import {TextStyle} from 'react-native';
+
 interface Size {
   xs: number;
   small: number;
@@ -7,11 +9,7 @@ interface Size {
   xxlg: number;
 }
 interface Weight {
-  full: string;
-  bold: string;
-  semi: string;
-  normal: string;
-  thin: string;
+  [key: string]: TextStyle['fontWeight'];
 }
 interface Fonts {
   size: Size;

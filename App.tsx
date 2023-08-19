@@ -1,6 +1,8 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
+import fonts from './src/theme/fonts';
+import colors from './src/theme/colors';
 
 export default function App() {
   return (
@@ -38,8 +40,21 @@ const styles = StyleSheet.create({
     width: '100%',
     aspectRatio: 1,
   },
-  header: {},
-  userAvatar: {},
-  userName: {},
-  threeDots: {},
+  header: {
+    flexDirection: 'row',
+    padding: 10,
+  },
+  userAvatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  userName: {
+    fontWeight: fonts.weight.bold,
+    color: colors.black,
+  },
+  threeDots: {
+    marginLeft: 'auto',
+  },
 });
