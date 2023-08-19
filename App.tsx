@@ -1,60 +1,24 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
-import fonts from './src/theme/fonts';
-import colors from './src/theme/colors';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import FeedPost from './src/components/FeedPost/FeedPost';
 
-export default function App() {
+const App = () => {
+  const isLiked = true;
   return (
-    <View style={styles.post}>
-      {/* Post Header */}
-      <View style={styles.header}>
-        <Image
-          source={{
-            uri: 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
-          }}
-          style={styles.userAvatar}
-        />
-        <Text style={styles.userName}>codergalib2005</Text>
-        <Entypo
-          name="dots-three-horizontal"
-          size={16}
-          style={styles.threeDots}
-        />
-      </View>
-      {/* Post Content */}
-      <Image
-        source={{
-          uri: 'https://images.pexels.com/photos/2745258/pexels-photo-2745258.jpeg',
-        }}
-        style={styles.image}
-      />
-      {/* Post Footer */}
-    </View>
+    <ScrollView style={styles.app}>
+      <FeedPost />
+      <FeedPost />
+      <FeedPost />
+      <FeedPost />
+      <FeedPost />
+    </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  post: {},
-  image: {
-    width: '100%',
-    aspectRatio: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    padding: 10,
-  },
-  userAvatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 10,
-  },
-  userName: {
-    fontWeight: fonts.weight.bold,
-    color: colors.black,
-  },
-  threeDots: {
-    marginLeft: 'auto',
+  app: {
+    flex: 1,
   },
 });
+
+export default App;
