@@ -8,32 +8,13 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
 import Comment from '../Comment/Comment';
+import {IPost} from '../../types/models';
 
 interface PropsTypes {
-  post: {
-    id: string;
-    createdAt: string;
-    image: string;
-    description: string;
-    user: {
-      id: string;
-      image: string;
-      username: string;
-    };
-    nofComments: number;
-    nofLikes: number;
-    comments: {
-      id: string;
-      comment: string;
-      user: {
-        id: string;
-        username: string;
-      };
-    }[];
-  };
+  post: IPost;
 }
 
-const FeedPost: React.FC<PropsTypes> = ({post}) => {
+const FeedPost: React.FC<PropsTypes> = ({post}: PropsTypes) => {
   const {comments, createdAt, description, id, image, user} = post;
 
   const isLiked = true;

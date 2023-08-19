@@ -3,18 +3,12 @@ import React from 'react';
 import styles from './styles';
 import colors from '../../theme/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {IComment} from '../../types/models';
 
 interface PropsTypes {
-  comment: {
-    id: string;
-    comment: string;
-    user: {
-      username: string;
-      id: string;
-    };
-  };
+  comment: IComment;
 }
-const Comment: React.FC<PropsTypes> = ({comment}) => {
+const Comment = ({comment}: PropsTypes) => {
   return (
     <View style={styles.comment}>
       <Text style={styles.commentText}>
